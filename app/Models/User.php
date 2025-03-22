@@ -40,4 +40,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function buses()
+    {
+        return $this->hasMany(Bus::class, 'driver_id');
+    }
 }
