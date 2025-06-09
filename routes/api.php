@@ -4,6 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/hello', function () {
+    return response()->json([
+        'message' => 'Hello from Laravel on Railway! 🎉'
+    ]);
+});
+
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
