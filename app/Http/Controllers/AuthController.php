@@ -18,7 +18,12 @@ class AuthController extends Controller
 
     public function register(UserRegisterRequest $request)
     {
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'user_type' => 'required|string|in:admin,user'
+        ]);;
         try {
             $user = $this->authDL->insert($validatedData);
             $token = auth('api')->login($user);
