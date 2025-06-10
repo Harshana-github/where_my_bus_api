@@ -5,6 +5,21 @@ use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
+Route::group(['prefix' => 'auth'], function ($router) {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+});
+
+Route::middleware(['auth:api'])->group(function () {
+    // auth
+    Route::post('me', [AuthController::class, 'me']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('logout', [AuthController::class, 'logout']);
+
+    // role
+    Route::get('role', [RoleController::class, 'all']);
+});
+
 Route::get('/hello', function () {
     return response()->json([
         'message' => 'Hello from Laravel on Railway! 🎉'
@@ -23,17 +38,20 @@ Route::get('/migrate-with-seeder', function () {
     return 'Migration and seeding completed!';
 });
 
-Route::group(['prefix' => 'auth'], function ($router) {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('register', [AuthController::class, 'register']);
+// Clear route cache
+Route::get('/artisan/clear-routes', function () {
+    Artisan::call('route:clear');
+    return '✅ Route cache cleared!';
 });
 
-Route::middleware(['auth:api'])->group(function () {
-    // auth
-    Route::post('me', [AuthController::class, 'me']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('logout', [AuthController::class, 'logout']);
+// Clear config cache
+Route::get('/artisan/clear-config', function () {
+    Artisan::call('config:clear');
+    return '✅ Config cache cleared!';
+});
 
-    // role
-    Route::get('role', [RoleController::class, 'all']);
+// Clear all optimizations (including view, config, route)
+Route::get('/artisan/clear-optimize', function () {
+    Artisan::call('optimize:clear');
+    return '✅ Optimization cache cleared!';
 });
