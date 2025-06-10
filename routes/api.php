@@ -5,6 +5,8 @@ use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
+
 
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
@@ -50,4 +52,17 @@ Route::get('/artisan/route-list', function () {
     Artisan::call('route:list', ['--json' => true]);
     $output = Artisan::output();
     return Response::make($output, 200, ['Content-Type' => 'application/json']);
+});
+
+// routes/web.php — TEMPORARY DEBUG ONLY
+Route::get('/test-register', function () {
+    $request = Request::create('/api/auth/register', 'POST', [
+        'name' => 'Admin',
+        'email' => 'admin@gmail.com',
+        'password' => 'kSG2LbN8Kdh',
+        'password_confirmation' => 'kSG2LbN8Kdh',
+        'user_type' => 'admin',
+    ]);
+
+    return app()->handle($request);
 });
