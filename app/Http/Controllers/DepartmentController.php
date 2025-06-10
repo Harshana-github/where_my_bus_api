@@ -19,6 +19,8 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        return "This is Post";
+
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
