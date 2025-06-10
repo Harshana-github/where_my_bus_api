@@ -18,7 +18,12 @@ COPY . .
 RUN composer install --optimize-autoloader --no-dev
 
 # Set permissions
-RUN chmod -R 775 storage bootstrap/cache \
+# RUN chmod -R 775 storage bootstrap/cache \
+#     && chown -R www-data:www-data .
+
+# Set directories to 775 and files to 664
+RUN find storage bootstrap/cache -type d -exec chmod 775 {} \; \
+    && find storage bootstrap/cache -type f -exec chmod 664 {} \; \
     && chown -R www-data:www-data .
 
 # Copy custom Nginx config
