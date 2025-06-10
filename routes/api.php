@@ -72,7 +72,7 @@ Route::get('/users', function () {
     return response()->json(User::all());
 });
 
-Route::get('/departments', [DepartmentController::class, 'index']);
+// Route::get('/departments', [DepartmentController::class, 'index']);
 Route::post('/departments', [DepartmentController::class, 'store']);
 
 Route::post('/test-post', function (Request $request) {
