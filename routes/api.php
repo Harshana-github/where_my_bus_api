@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoleController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -70,3 +71,6 @@ Route::get('/test-register', function () {
 Route::get('/users', function () {
     return response()->json(User::all());
 });
+
+Route::get('/departments', [DepartmentController::class, 'index']);
+Route::post('/departments', [DepartmentController::class, 'store']);
