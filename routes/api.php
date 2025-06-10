@@ -81,3 +81,10 @@ Route::post('/test-post', function (Request $request) {
         'received' => $request->all()
     ]);
 });
+
+Route::any('/debug-method', function (Request $request) {
+    return response()->json([
+        'method' => $request->method(),
+        'data' => $request->all()
+    ]);
+});
