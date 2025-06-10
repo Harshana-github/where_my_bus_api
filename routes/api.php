@@ -54,7 +54,6 @@ Route::get('/artisan/route-list', function () {
     return Response::make($output, 200, ['Content-Type' => 'application/json']);
 });
 
-// routes/web.php — TEMPORARY DEBUG ONLY
 Route::get('/test-register', function () {
     $request = Request::create('/api/auth/register', 'POST', [
         'name' => 'Admin',
