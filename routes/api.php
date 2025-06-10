@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Response;
 
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
@@ -38,20 +39,15 @@ Route::get('/migrate-with-seeder', function () {
     return 'Migration and seeding completed!';
 });
 
-// Clear route cache
-Route::get('/artisan/clear-routes', function () {
+Route::get('/artisan/clear-all', function () {
     Artisan::call('route:clear');
-    return '✅ Route cache cleared!';
-});
-
-// Clear config cache
-Route::get('/artisan/clear-config', function () {
     Artisan::call('config:clear');
-    return '✅ Config cache cleared!';
+    Artisan::call('optimize:clear');
+    return '✅ Cache cleared';
 });
 
-// Clear all optimizations (including view, config, route)
-Route::get('/artisan/clear-optimize', function () {
-    Artisan::call('optimize:clear');
-    return '✅ Optimization cache cleared!';
+Route::get('/artisan/route-list', function () {
+    Artisan::call('route:list', ['--json' => true]);
+    $output = Artisan::output();
+    return Response::make($output, 200, ['Content-Type' => 'application/json']);
 });
