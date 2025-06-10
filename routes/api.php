@@ -58,7 +58,7 @@ Route::get('/artisan/route-list', function () {
 
 Route::get('/test-register', function () {
     $request = Request::create('/api/auth/register', 'POST', [
-        'name' => 'Admin',
+        'name' => 'A',
         'email' => 'admin@gmail.com',
         'password' => 'kSG2LbN8Kdh',
         'password_confirmation' => 'kSG2LbN8Kdh',
