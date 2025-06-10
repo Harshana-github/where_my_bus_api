@@ -74,3 +74,10 @@ Route::get('/users', function () {
 
 Route::get('/departments', [DepartmentController::class, 'index']);
 Route::post('/departments', [DepartmentController::class, 'store']);
+
+Route::post('/test-post', function (Request $request) {
+    return response()->json([
+        'message' => 'POST route works!',
+        'received' => $request->all()
+    ]);
+});
