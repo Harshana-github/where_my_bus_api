@@ -5,6 +5,7 @@ namespace App\Http\DataLayer;
 use App\Models\Bus;
 use App\Models\Driver;
 use App\Models\Route;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class DriverDataLayer
@@ -56,6 +57,11 @@ class DriverDataLayer
             // Step 4: Create Bus
             $bus = Bus::create($busData);
 
+            $user = User::find($driverData['user_id']);
+            
+            if ($user) {
+                $user->update(['is_profile_completed' => true]);
+            }
             return [
                 'driver' => $driver,
                 'route' => $route,
