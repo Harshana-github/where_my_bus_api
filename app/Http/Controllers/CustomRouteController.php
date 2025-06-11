@@ -88,7 +88,7 @@ class CustomRouteController extends Controller
         }
     }
 
-    public function getDriverFullProfile($driverId)
+    public function getDriverProfile($driverId)
     {
         try {
             $driver = Driver::with([
