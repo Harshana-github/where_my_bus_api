@@ -38,6 +38,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/driver/{id}/buses', [CustomRouteController::class, 'driverBuses']);
     Route::get('/routes/{id}/towns', [CustomRouteController::class, 'routeTowns']);
     Route::post('/routes/{id}/towns', [CustomRouteController::class, 'syncRouteTowns']);
+    Route::post('/driver-profile', [CustomRouteController::class, 'madeDriverProfile']);
+    Route::get('driver-profile/{driverId}', [CustomRouteController::class, 'getDriverProfile']);
 });
 
 // Artisan Commands 

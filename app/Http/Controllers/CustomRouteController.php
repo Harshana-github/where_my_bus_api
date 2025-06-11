@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\DataLayer\BusDataLayer;
+use App\Http\DataLayer\DriverDataLayer;
 use App\Http\DataLayer\RouteDataLayer;
+use App\Http\Requests\StoreDriverProfileRequest;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -11,11 +14,13 @@ class CustomRouteController extends Controller
 {
     protected $busDL;
     protected $routeDL;
+    protected $driverDL;
 
-    public function __construct(BusDataLayer $busDL, RouteDataLayer $routeDL)
+    public function __construct(BusDataLayer $busDL, RouteDataLayer $routeDL, DriverDataLayer $driverDL)
     {
         $this->busDL = $busDL;
         $this->routeDL = $routeDL;
+        $this->driverDL = $driverDL;
     }
 
     // GET /api/bus-routes
@@ -65,6 +70,39 @@ class CustomRouteController extends Controller
         } catch (\Exception $e) {
             Log::error("Failed to sync towns for route: " . $e->getMessage());
             return response()->json(['error' => 'Failed to sync towns'], 500);
+        }
+    }
+
+    // POST /api/driver-profile
+    public function madeDriverProfile(StoreDriverProfileRequest $request)
+    {
+        try {
+            $result = $this->driverDL->insertProfile($request);
+            return response()->json([
+                'message' => 'Driver profile created successfully',
+                'data' => $result,
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error("Failed to create driver profile: " . $e->getMessage());
+            return response()->json(['error' => 'Failed to create driver profile'], 500);
+        }
+    }
+
+    public function getDriverFullProfile($driverId)
+    {
+        try {
+            $driver = Driver::with([
+                'user',
+                'bus.route',
+            ])->findOrFail($driverId);
+
+            return response()->json([
+                'message' => 'Driver profile retrieved successfully',
+                'data' => $driver,
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Failed to get driver full profile: " . $e->getMessage());
+            return response()->json(['error' => 'Driver profile not found'], 404);
         }
     }
 }
