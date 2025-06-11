@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use SebastianBergmann\CodeCoverage\Driver\Driver;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -41,8 +42,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function buses()
+    public function driver()
     {
-        return $this->hasMany(Bus::class, 'driver_id');
+        return $this->hasOne(Driver::class);
     }
 }

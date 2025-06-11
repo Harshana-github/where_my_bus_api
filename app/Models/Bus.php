@@ -9,25 +9,33 @@ class Bus extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['bus_number', 'registration_id', 'driver_id', 'route_id'];
+    protected $fillable = [
+        'bus_number',
+        'registration_id',
+        'driver_id',
+        'route_id',
+        'image_01',
+        'is_active',
+        'is_filed'
+    ];
 
     public function driver()
     {
-        return $this->belongsTo(User::class, 'driver_id');
+        return $this->belongsTo(Driver::class);
     }
 
     public function route()
     {
-        return $this->belongsTo(Route::class, 'route_id');
+        return $this->belongsTo(Route::class);
     }
 
-    public function locationTrackings()
+    public function locationTracking()
     {
         return $this->hasMany(LocationTracking::class);
     }
 
     public function aiPredictions()
     {
-        return $this->hasMany(AIPrediction::class);
+        return $this->hasMany(AiPrediction::class);
     }
 }

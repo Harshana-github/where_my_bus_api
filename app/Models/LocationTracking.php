@@ -9,7 +9,14 @@ class LocationTracking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['bus_id', 'latitude', 'longitude', 'timestamp'];
+    protected $table = 'location_tracking';
+
+    protected $fillable = [
+        'bus_id',
+        'latitude',
+        'longitude',
+        'timestamp'
+    ];
 
     public function bus()
     {

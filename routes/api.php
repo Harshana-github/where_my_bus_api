@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\AIPredictionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BusController;
+use App\Http\Controllers\CustomRouteController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\LocationTrackingController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TownController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -19,6 +26,18 @@ Route::middleware(['auth:api'])->group(function () {
 
     // role
     Route::get('role', [RoleController::class, 'all']);
+
+    Route::apiResource('buses', BusController::class);
+    Route::apiResource('drivers', DriverController::class);
+    Route::apiResource('routes', RouteController::class);
+    Route::apiResource('towns', TownController::class);
+    Route::apiResource('location-tracking', LocationTrackingController::class);
+    Route::apiResource('ai-predictions', AIPredictionController::class);
+
+    Route::get('/bus-routes', [CustomRouteController::class, 'busRoutes']);
+    Route::get('/driver/{id}/buses', [CustomRouteController::class, 'driverBuses']);
+    Route::get('/routes/{id}/towns', [CustomRouteController::class, 'routeTowns']);
+    Route::post('/routes/{id}/towns', [CustomRouteController::class, 'syncRouteTowns']);
 });
 
 // Artisan Commands 

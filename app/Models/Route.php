@@ -9,7 +9,13 @@ class Route extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['route_name', 'start_location', 'end_location'];
+        protected $fillable = [
+        'route_name',
+        'start_location',
+        'end_location',
+        'is_active',
+        'is_filed'
+    ];
 
     public function buses()
     {
@@ -19,5 +25,10 @@ class Route extends Model
     public function locationTrackings()
     {
         return $this->hasMany(LocationTracking::class);
+    }
+
+    public function towns()
+    {
+        return $this->belongsToMany(Town::class, 'route_town');
     }
 }

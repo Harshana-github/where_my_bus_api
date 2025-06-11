@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class AIPrediction extends Model
 {
-    use HasFactory;
+    protected $table = 'ai_predictions';
 
-    protected $fillable = ['bus_id', 'predicted_arrival_time', 'distance', 'speed', 'traffic_condition', 'prediction_timestamp'];
+    protected $fillable = [
+        'bus_id',
+        'predicted_arrival_time',
+        'distance',
+        'speed',
+        'traffic_condition',
+        'prediction_timestamp'
+    ];
 
     public function bus()
     {
