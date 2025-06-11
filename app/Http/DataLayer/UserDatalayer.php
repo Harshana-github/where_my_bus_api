@@ -38,5 +38,5 @@ class UserDataLayer
         $user->delete();
         return true;
     }
-    
+
 }
