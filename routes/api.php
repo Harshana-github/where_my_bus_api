@@ -9,7 +9,6 @@ use App\Http\Controllers\LocationTrackingController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TownController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -34,7 +33,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('towns', TownController::class);
     Route::apiResource('location-tracking', LocationTrackingController::class);
     Route::apiResource('ai-predictions', AIPredictionController::class);
-    Route::apiResource('users', UserController::class);
 
     Route::get('/bus-routes', [CustomRouteController::class, 'busRoutes']);
     Route::get('/driver/{id}/buses', [CustomRouteController::class, 'driverBuses']);
