@@ -91,7 +91,6 @@ class CustomRouteController extends Controller
     public function getDriverProfile($driverId)
     {
         try {
-            return $driverId;
             $driver = Driver::with([
                 'user',
                 'buses.route',
