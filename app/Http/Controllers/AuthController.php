@@ -44,7 +44,7 @@ class AuthController extends Controller
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        $user = auth('api')->user();
+        $user = auth('api')->user()->load(['driver.buses.route']);
 
         return response([
             'user' => $user,

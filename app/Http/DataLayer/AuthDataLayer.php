@@ -17,7 +17,7 @@ class AuthDataLayer
                 'user_type' => $request['user_type'],
                 'password' => bcrypt($request['password']),
             ]);
-
+            
             return $dataObj;
         } catch (QueryException $ex) {
             Log::error('Error creating user: ' . $ex->getMessage());
