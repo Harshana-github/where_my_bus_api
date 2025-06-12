@@ -27,8 +27,6 @@ class PassengerController extends Controller
     {
         return response()->json(
             User::where('user_type', 'driver')
-                ->whereNotNull('latitude')
-                ->whereNotNull('longitude')
                 ->get(['id', 'name', 'latitude', 'longitude'])
         );
     }

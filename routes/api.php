@@ -45,7 +45,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('driver-profile/{driverId}', [CustomRouteController::class, 'getDriverProfile']);
 
     Route::post('/passenger/update-location', [PassengerController::class, 'updateLocation']);
-    Route::get('/drivers/locations', [PassengerController::class, 'locations']);
+    Route::get('/drivers-locations', [PassengerController::class, 'locations']);
 
 });
 
