@@ -16,7 +16,9 @@ class Bus extends Model
         'route_id',
         'image_01',
         'is_active',
-        'is_filed'
+        'is_filed',
+        'latitude',
+        'longitude',
     ];
 
     public function driver()

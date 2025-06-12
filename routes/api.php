@@ -6,6 +6,7 @@ use App\Http\Controllers\BusController;
 use App\Http\Controllers\CustomRouteController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\LocationTrackingController;
+use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TownController;
@@ -42,6 +43,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/routes/{id}/towns', [CustomRouteController::class, 'syncRouteTowns']);
     Route::post('/driver-profile', [CustomRouteController::class, 'madeDriverProfile']);
     Route::get('driver-profile/{driverId}', [CustomRouteController::class, 'getDriverProfile']);
+
+    Route::get('/passenger/update-location', [PassengerController::class, 'updateLocation']);
 });
 
 // Artisan Commands 
