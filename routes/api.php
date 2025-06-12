@@ -44,7 +44,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/driver-profile', [CustomRouteController::class, 'madeDriverProfile']);
     Route::get('driver-profile/{driverId}', [CustomRouteController::class, 'getDriverProfile']);
 
-    Route::get('/passenger/update-location', [PassengerController::class, 'updateLocation']);
+    Route::post('/passenger/update-location', [PassengerController::class, 'updateLocation']);
 });
 
 // Artisan Commands 
