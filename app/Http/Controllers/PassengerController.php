@@ -13,11 +13,7 @@ class PassengerController extends Controller
             'longitude' => 'required|numeric',
         ]);
 
-        $user = $request->user(); // Get the logged-in user
-
-        if ($user->user_type !== 'passenger') {
-            return response()->json(['message' => 'Only passengers can update location.'], 403);
-        }
+        $user = $request->user();
 
         $user->latitude = $request->latitude;
         $user->longitude = $request->longitude;
