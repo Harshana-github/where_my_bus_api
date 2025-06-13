@@ -2,70 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\DataLayer\TownDataLayer;
-use App\Http\Requests\StoreTownRequest;
-use App\Http\Requests\UpdateTownRequest;
+use App\Models\Town;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+
 
 class TownController extends Controller
 {
-    protected $townDL;
-
-    public function __construct(TownDataLayer $townDL)
-    {
-        $this->townDL = $townDL;
-    }
+    // GET /towns
     public function index()
     {
-        try {
-            return response()->json($this->townDL->getAll());
-        } catch (\Exception $e) {
-            Log::error("Failed to fetch towns: " . $e->getMessage());
-            return response()->json(['error' => 'Failed to fetch towns'], 500);
-        }
+        return Town::where('is_active', true)
+            ->select('id', 'name')
+            ->get();
     }
 
-    public function store(StoreTownRequest $request)
+    // Optional methods for full resource:
+    public function store(Request $request)
     {
-        try {
-            $town = $this->townDL->insert($request->validated());
-            return response()->json($town, 201);
-        } catch (\Exception $e) {
-            Log::error("Failed to create town: " . $e->getMessage());
-            return response()->json(['error' => 'Failed to create town'], 500);
-        }
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        return Town::create($request->only('name'));
     }
 
     public function show($id)
     {
-        try {
-            return response()->json($this->townDL->find($id));
-        } catch (\Exception $e) {
-            Log::error("Town not found: " . $e->getMessage());
-            return response()->json(['error' => 'Town not found'], 404);
-        }
+        return Town::findOrFail($id);
     }
 
-    public function update(UpdateTownRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        try {
-            $town = $this->townDL->update($id, $request->validated());
-            return response()->json($town);
-        } catch (\Exception $e) {
-            Log::error("Failed to update town: " . $e->getMessage());
-            return response()->json(['error' => 'Failed to update town'], 500);
-        }
+        $town = Town::findOrFail($id);
+        $town->update($request->only('name', 'is_active'));
+        return $town;
     }
 
     public function destroy($id)
     {
-        try {
-            $this->townDL->delete($id);
-            return response()->json(['message' => 'Town deleted']);
-        } catch (\Exception $e) {
-            Log::error("Failed to delete town: " . $e->getMessage());
-            return response()->json(['error' => 'Failed to delete town'], 500);
-        }
+        $town = Town::findOrFail($id);
+        $town->delete();
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }
