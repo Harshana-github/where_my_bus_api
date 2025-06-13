@@ -23,7 +23,7 @@ class TownController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        return Town::create($request->only('name'));
+        return Town::create($request);
     }
 
     public function show($id)
@@ -34,7 +34,7 @@ class TownController extends Controller
     public function update(Request $request, $id)
     {
         $town = Town::findOrFail($id);
-        $town->update($request->only('name', 'is_active'));
+        $town->update($request);
         return $town;
     }
 
