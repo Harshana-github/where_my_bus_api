@@ -16,14 +16,13 @@ class TownController extends Controller
             ->get();
     }
 
-    // Optional methods for full resource:
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        return Town::create($request);
+        return Town::create($validatedData);
     }
 
     public function show($id)
