@@ -9,7 +9,8 @@ class Town extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name,is_active'];
+    protected $fillable = ['name', 'is_active'];
+
 
     public function routes()
     {
