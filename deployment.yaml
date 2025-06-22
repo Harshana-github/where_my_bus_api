@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-api
+  template:
+    metadata:
+      labels:
+        app: laravel-api
+    spec:
+      imagePullSecrets:
+        - name: artifact-registry-secret
+      containers:
+        - name: laravel-api
+          image: asia-south1-docker.pkg.dev/where-my-bus-462704/laravel-api-repo/where-my-bus-api:latest
+          ports:
+            - containerPort: 8000
+
