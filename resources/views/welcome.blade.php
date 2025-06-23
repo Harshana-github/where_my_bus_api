@@ -55,7 +55,7 @@
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Hi ,All I am Harshna
+                                    Hi ,All I am Harshna Lakmal
                                 </div>
                             </div>
                         </div>
