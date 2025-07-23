@@ -13,6 +13,7 @@ class LocationTracking extends Model
 
     protected $fillable = [
         'bus_id',
+        'user_id',
         'latitude',
         'longitude',
         'timestamp'
@@ -26,5 +27,10 @@ class LocationTracking extends Model
     public function route()
     {
         return $this->belongsTo(Route::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
