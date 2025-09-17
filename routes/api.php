@@ -60,6 +60,11 @@ Route::get('/artisan/migrate-with-seeder', function () {
     return 'Migration and seeding completed!';
 });
 
+Route::get('/artisan/jwt-secret', function () {
+    Artisan::call('jwt:secret', ['--force' => true]);
+    return 'jwt secret created!';
+});
+
 Route::get('/artisan/clear-all', function () {
     Artisan::call('route:clear');
     Artisan::call('config:clear');
