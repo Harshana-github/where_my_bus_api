@@ -6,9 +6,28 @@ use App\Models\Bus;
 
 class BusDataLayer
 {
+    // public function getAll()
+    // {
+    //     return Bus::with(['driver', 'route'])->orderBy('id')->get();
+    // }
+
     public function getAll()
     {
-        return Bus::with(['driver', 'route'])->orderBy('id')->get();
+        return Bus::with([
+            'driver.user:id,name,latitude,longitude', // <-- add this
+            'route:id,route_name',
+        ])
+            ->orderBy('id')
+            ->get([
+                'id',
+                'bus_number',
+                'driver_id',
+                'route_id',
+                'latitude',
+                'longitude',
+                'created_at',
+                'updated_at'
+            ]);
     }
 
     public function insert(array $data)
