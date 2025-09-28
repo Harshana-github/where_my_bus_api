@@ -11,11 +11,34 @@ class BusDataLayer
     //     return Bus::with(['driver', 'route'])->orderBy('id')->get();
     // }
 
+    // public function getAll()
+    // {
+    //     return Bus::with([
+    //         'driver.user:id,name,latitude,longitude', // <-- add this
+    //         'route:id,route_name',
+    //     ])
+    //         ->orderBy('id')
+    //         ->get([
+    //             'id',
+    //             'bus_number',
+    //             'driver_id',
+    //             'route_id',
+    //             'latitude',
+    //             'longitude',
+    //             'created_at',
+    //             'updated_at'
+    //         ]);
+    // }
+
     public function getAll()
     {
         return Bus::with([
-            'driver.user:id,name,latitude,longitude', // <-- add this
-            'route:id,route_name',
+            'driver.user:id,name,latitude,longitude',
+            // include ids on route so Laravel can resolve nested belongsTo
+            'route:id,route_name,start_town_id,end_town_id',
+            // nested: pull the town names
+            'route.startTown:id,name',
+            'route.endTown:id,name',
         ])
             ->orderBy('id')
             ->get([
@@ -26,7 +49,7 @@ class BusDataLayer
                 'latitude',
                 'longitude',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]);
     }
 
