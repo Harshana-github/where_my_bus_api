@@ -16,4 +16,14 @@ class Town extends Model
     {
         return $this->belongsToMany(Route::class, 'route_town');
     }
+
+    public function routesStartingHere()
+    {
+        return $this->hasMany(Route::class, 'start_town_id');
+    }
+
+    public function routesEndingHere()
+    {
+        return $this->hasMany(Route::class, 'end_town_id');
+    }
 }

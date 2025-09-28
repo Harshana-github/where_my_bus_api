@@ -9,12 +9,12 @@ class Route extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
+    protected $fillable = [
         'route_name',
-        'start_location',
-        'end_location',
+        'start_town_id',
+        'end_town_id',
         'is_active',
-        'is_filed'
+        'is_filed',
     ];
 
     public function buses()
@@ -27,8 +27,20 @@ class Route extends Model
         return $this->hasMany(LocationTracking::class);
     }
 
+    // Many-to-many remains if you still use the route_town pivot for via-towns
     public function towns()
     {
         return $this->belongsToMany(Town::class, 'route_town');
+    }
+
+    // NEW: direct start/end relations
+    public function startTown()
+    {
+        return $this->belongsTo(Town::class, 'start_town_id');
+    }
+
+    public function endTown()
+    {
+        return $this->belongsTo(Town::class, 'end_town_id');
     }
 }

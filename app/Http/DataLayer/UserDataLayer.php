@@ -38,4 +38,14 @@ class UserDataLayer
         $user->delete();
         return true;
     }
+
+    public function updateLocationForUserId(int $userId, array $coords)
+    {
+        $user = User::findOrFail($userId);
+        $user->latitude  = $coords['latitude'];
+        $user->longitude = $coords['longitude'];
+        $user->save();
+
+        return $user;
+    }
 }

@@ -48,10 +48,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/passenger/update-location', [PassengerController::class, 'updateLocation']);
     Route::get('/drivers-locations', [PassengerController::class, 'locations']);
 
-    Route::post('/users/update-location', [LocationController::class, 'updateUserLocation']);
+    // Route::post('/users/update-location', [LocationController::class, 'updateUserLocation']);
+
+    Route::post('/users/update-location', [UserController::class, 'updateLocation']);
+
     Route::get('/eta', [LocationController::class, 'eta']);
-
-
 });
 
 // Artisan Commands 
