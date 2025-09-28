@@ -17,8 +17,8 @@ class Bus extends Model
         'image_01',
         'is_active',
         'is_filed',
-        'latitude',
-        'longitude',
+        'latitude' => 'float',
+        'longitude' => 'float',
     ];
 
     public function driver()
