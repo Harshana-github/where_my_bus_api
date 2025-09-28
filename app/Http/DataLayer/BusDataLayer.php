@@ -8,16 +8,7 @@ class BusDataLayer
 {
     public function getAll()
     {
-        // return Bus::with(['driver', 'route'])->orderBy('id')->get();
-
-        return Bus::with([
-            // bring the driver's user so we have name & coords
-            'driver.user:id,name,latitude,longitude',
-            // you only need the route name for the UI
-            'route:id,route_name'
-        ])
-            // return only the columns you need from buses table (optional but tidy)
-            ->get(['id', 'bus_number', 'driver_id', 'route_id', 'latitude', 'longitude', 'created_at', 'updated_at']);
+        return Bus::with(['driver', 'route'])->orderBy('id')->get();
     }
 
     public function insert(array $data)
