@@ -23,12 +23,12 @@ class StoreDriverProfileRequest extends FormRequest
             'driver.is_filed' => 'boolean',
 
             // Route
-            'route.route_name' => 'required|string|unique:routes,route_name',
-            'route.start_location' => 'required|string',
-            'route.end_location' => 'required|string',
-            'route.is_active' => 'boolean',
-            'route.is_filed' => 'boolean',
-
+            'route.route_name'    => 'required|string|unique:routes,route_name',
+            'route.start_town_id' => 'required|integer|exists:towns,id',
+            'route.end_town_id'   => 'required|integer|exists:towns,id|different:route.start_town_id',
+            'route.is_active'     => 'boolean',
+            'route.is_filed'      => 'boolean',
+            
             // Bus
             'bus.bus_number' => 'required|string|unique:buses,bus_number',
             'bus.registration_id' => 'required|string|unique:buses,registration_id',
