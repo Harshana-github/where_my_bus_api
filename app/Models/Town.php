@@ -8,8 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Town extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'is_active',
+        'latitude',
+        'longitude',
+    ];
 
-    protected $fillable = ['name', 'latitude', 'longitude', 'is_active'];
+    protected $casts = [
+        'is_active' => 'boolean',
+        'latitude'  => 'float',
+        'longitude' => 'float',
+    ];
 
 
     public function routes()
