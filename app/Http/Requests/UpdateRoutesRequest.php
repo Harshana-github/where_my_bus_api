@@ -20,6 +20,8 @@ class UpdateRoutesRequest extends FormRequest
             'end_location' => 'sometimes|string',
             'is_active' => 'boolean',
             'is_filed' => 'boolean',
+            'main_town_ids'  => ['sometimes', 'array'],
+            'main_town_ids.*' => ['integer', 'exists:towns,id'],
         ];
     }
 }

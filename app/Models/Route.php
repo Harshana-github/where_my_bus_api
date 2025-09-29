@@ -15,6 +15,13 @@ class Route extends Model
         'end_town_id',
         'is_active',
         'is_filed',
+        'main_town_ids',
+    ];
+
+    protected $casts = [
+        'is_active'     => 'boolean',
+        'is_filed'      => 'boolean',
+        'main_town_ids' => 'array', 
     ];
 
     public function buses()
