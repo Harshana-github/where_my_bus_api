@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\CustomRouteController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LocationTrackingController;
 use App\Http\Controllers\PassengerController;
@@ -53,6 +54,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/users/update-location', [UserController::class, 'updateLocation']);
 
     Route::get('/eta', [LocationController::class, 'eta']);
+
+    Route::post('/feedback', [FeedbackController::class, 'store']);
 });
 
 // Artisan Commands 
