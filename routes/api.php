@@ -56,6 +56,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/eta', [LocationController::class, 'eta']);
 
     Route::post('/feedback', [FeedbackController::class, 'store']);
+    Route::get('/feedback', [FeedbackController::class, 'index']);
 });
 
 // Artisan Commands 
